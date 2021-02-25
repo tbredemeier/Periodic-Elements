@@ -65,8 +65,8 @@ struct ContentView_Previews: PreviewProvider {
 
 struct Element: Identifiable {
     let id = UUID()
-    var symbol: String
-    var name: String
-    var history: String
-    var facts: String
+    let symbol: String
+    let name: String
+    let history: String
+    let facts: String
 }
