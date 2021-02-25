@@ -8,12 +8,16 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State private var elements = [Element]()
     var body: some View {
-        Text("Hello, world!")
-            .padding()
-            .onAppear(perform: {
-                queryAPI()
-            })
+        NavigationView {
+            List(elements) { element in
+                Text(element.name)
+            }
+        }
+        .onAppear(perform: {
+            queryAPI()
+        })
     }
     
     func queryAPI() {
@@ -32,4 +36,9 @@ struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
     }
+}
+
+struct Element: Identifiable {
+    let id = UUID()
+    var name: String
 }
