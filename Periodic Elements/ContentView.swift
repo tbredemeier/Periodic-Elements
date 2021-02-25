@@ -26,7 +26,12 @@ struct ContentView: View {
         if let url = URL(string: query) {
             if let data = try? Data(contentsOf: url) {
                 let json = try! JSON(data: data)
-                print(json)
+                let contents = json.arrayValue
+                for item in contents {
+                    let name = item["name"].stringValue
+                    let element = Element(name: name)
+                    elements.append(element)
+                }
             }
         }
     }
