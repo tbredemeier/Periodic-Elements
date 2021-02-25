@@ -12,8 +12,25 @@ struct ContentView: View {
     var body: some View {
         NavigationView {
             List(elements) { element in
-                Text(element.name)
+                NavigationLink(
+                    destination: VStack {
+                        Text(element.name)
+                            .padding()
+                        Text(element.symbol)
+                            .padding()
+                        Text(element.history)
+                            .padding()
+                        Text(element.facts)
+                            .padding()
+                    },
+                    label: {
+                        HStack {
+                            Text(element.symbol)
+                            Text(element.name)
+                        }
+                    })
             }
+            .navigationTitle("Periodic Elements")
         }
         .onAppear(perform: {
             queryAPI()
