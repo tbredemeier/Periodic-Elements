@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
     @State private var elements = [Element]()
+    @State private var showingAlert = false
     var body: some View {
         NavigationView {
             List(elements) { element in
@@ -35,6 +36,11 @@ struct ContentView: View {
         .onAppear(perform: {
             queryAPI()
         })
+        .alert(isPresented: $showingAlert, content: {
+            Alert(title: Text("Loading Error"),
+                  message: Text("There was a problem loading the data"),
+                  dismissButton: .default(Text("OK")))
+        })
     }
     
     func queryAPI() {
@@ -52,8 +58,10 @@ struct ContentView: View {
                     let element = Element(symbol: symbol, name: name, history: history, facts: facts)
                     elements.append(element)
                 }
+                return
             }
         }
+        showingAlert = true
     }
 }
 
